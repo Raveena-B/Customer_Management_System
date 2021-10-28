@@ -90,7 +90,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         // New value for one column
-
         ContentValues values = new ContentValues();
         values.put(UserProfile.Users.COLUMN_2, dob);
         values.put(UserProfile.Users.COLUMN_3, password);
@@ -142,31 +141,20 @@ public class DBHelper extends SQLiteOpenHelper {
     //read method
     /*Implement a method named readAllInfo() to retrieve all the user details stored in the
     database table*/
-
-
     public List readAllInfo(){   //no parameter passing
-
         String username = "jeni"; //get the names that are same name to jeny
         SQLiteDatabase db = getReadableDatabase();
-
-        /* Define a projection that specifies which columns from the database
-         you will actually use after this query.*/
-        String[] projection = {
+        String[] projection = { /* Define a projection that specifies which columns from the database you will actually use after this query.*/
                 BaseColumns._ID,
                 UserProfile.Users.COLUMN_1,
                 UserProfile.Users.COLUMN_2,
                 UserProfile.Users.COLUMN_3,
                 UserProfile.Users.COLUMN_4,
         };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection = UserProfile.Users.COLUMN_1 + " = ?";
+        String selection = UserProfile.Users.COLUMN_1 + " = ?";        // Filter results WHERE "title" = 'My Title'
         String[] selectionArgs = { username };
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
+        String sortOrder =                                 // How you want the results sorted in the resulting Cursor
                 UserProfile.Users.COLUMN_1 + " ASC";
-
         Cursor cursor = db.query(    //get the details for the cursor object
                 UserProfile.Users.TABLE_NAME,   // The table to query
                 projection,             // selection :- The array of columns to return (pass null to get all)
@@ -176,7 +164,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 null,             // don't filter by row groups
                 sortOrder               // The sort order
         );
-
         List usernames = new ArrayList<>();
         while(cursor.moveToNext()) {
             String user = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_1));
@@ -190,17 +177,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    /*Overload the method readAllInfor() to retrieve the user details based on the primary
-    key.*/
-
-
+    /*Overload the method readAllInfor() to retrieve the user details based on the primary  key.*/
     public List readAllInfo(String username){   //no parameter passing
-
-
         SQLiteDatabase db = getReadableDatabase();
-
-        /* Define a projection that specifies which columns from the database
-         you will actually use after this query.*/
+        /* Define a projection that specifies which columns from the database you will actually use after this query.*/
         String[] projection = {
                 BaseColumns._ID,
                 UserProfile.Users.COLUMN_1,
@@ -208,15 +188,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 UserProfile.Users.COLUMN_3,
                 UserProfile.Users.COLUMN_4,
         };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection = UserProfile.Users.COLUMN_1 + "LIKE";
+        String selection = UserProfile.Users.COLUMN_1 + "LIKE";        // Filter results WHERE "title" = 'My Title'
         String[] selectionArgs = { username };
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
+        String sortOrder =                 // How you want the results sorted in the resulting Cursor
                 UserProfile.Users.COLUMN_1 + " ASC";
-
         Cursor cursor = db.query(    //get the details for the cursor object
                 UserProfile.Users.TABLE_NAME,   // The table to query
                 projection,             // selection :- The array of columns to return (pass null to get all)
@@ -226,7 +201,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 null,             // don't filter by row groups
                 sortOrder               // The sort order
         );
-
         List userInfo = new ArrayList<>();
         while(cursor.moveToNext()) {
             String user = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.Users.COLUMN_1));
